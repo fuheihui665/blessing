@@ -1,1017 +1,218 @@
-<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>祝福语复制工具</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5',
-                        secondary: '#EC4899',
-                        accent: '#8B5CF6',
-                        neutral: '#1F2937',
-                        'neutral-light': '#F3F4F6',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-in-out',
-                        'bounce-light': 'bounceLight 1s ease-in-out',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        bounceLight: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-5px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .card-hover {
-                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-            }
-            .btn-primary {
-                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50;
-            }
-            .btn-success {
-                @apply bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400/50;
-            }
-            .blessing-container {
-                counter-reset: blessing-counter;
-            }
-            .blessing-item::before {
-                counter-increment: blessing-counter;
-                content: counter(blessing-counter) ". ";
-                color: #4F46E5;
-                font-weight: bold;
-                margin-right: 8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>端午祝福语</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            success: '#00B42A',
+            neutral: '#F5F7FA',
+            'neutral-light': '#F9FAFB',
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'micro': '0 1px 4px rgba(0,0,0,0.05)',
+          },
+          borderRadius: {
+            'sm': '4px',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    body {
+      overscroll-behavior: none;
+    }
+    .blessing-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .blessing-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(22, 93, 255, 0.1);
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen font-sans">
-    <div class="container mx-auto px-4 py-12 max-w-5xl">
-        <!-- 页面标题 -->
-        <header class="text-center mb-12 animate-fade-in">
-            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-neutral mb-4 text-shadow">
-                <span class="text-primary">祝福</span><span class="text-secondary">语</span>
-                <span class="text-accent">复制工具</span>
-            </h1>
-            <p class="text-lg text-neutral/70 max-w-2xl mx-auto">放开那三国2祝福语 欢迎转发</p>
-        </header>
-
-        <!-- 祝福语列表 -->
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-6 blessing-container">
-            <!-- 第1句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-1">
-                            祝大家端午安康
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-1">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第2句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-2">
-                           香囊寄思
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-2">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第3句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-3">
-                            粽子飘香
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-3">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第4句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-4">
-                            万树千山粽是情
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-4">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第5句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-5">
-                            送你一颗好运粽
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-5">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第6句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-6">
-                          五月五赛龙舟
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-6">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第7句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-7">
-                           好的东西就需要分享
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-7">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第8句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-8">
-                            愿幸福的粽叶裹住你
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-8">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第9句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-9">
-                            送你一只香甜粽子
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-9">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第10句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-10">
-                            想拉着你的手一起看龙舟
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-10">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-    
-
-   
-            <!-- 第11句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-11">
-                            禁止端午节不理我
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-11">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第12句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-12">
-                            今年送你的粽子不一般
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-12">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第13句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-13">
-                            祝你端午吉祥如意
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-13">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第14句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-14">
-                           希望你粽是幸运
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-14">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第15句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-15">
-                            蒲月初五是端午
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-15">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第16句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-16">
-                           青绿的粽叶包裹浓浓的真情
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-16">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第17句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-17">
-                           五色的丝线迎风飞舞
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-17">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第18句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-18">
-                            五色新丝缠角粽
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-18">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第19句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-19">
-                            汨罗江在诉说着一段神奇的故事
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-19">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第20句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-20">
-                           又是佳节好时光
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-20">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-    
-
- 
-            <!-- 第21句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-21">
-                           热烈龙舟划动着千年的祈愿
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-21">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第22句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-22">
-                            愿你品尝出人生的夸姣和蒲月五的情怀
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-22">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第23句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-23">
-                           吃的是粽子甜的是生活
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-23">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第24句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-24">
-                          长长丝线绑健康
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-24">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第25句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-25">
-                            六月的轻风飘来淡淡的粽香
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-25">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第26句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-26">
-                          甜甜粽馅溢飘香
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-26">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第27句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-27">
-                            希望祝福能随着艾叶的淡淡清香飘到你那里
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-27">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第28句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-28">
-                            赛舟驰骋处处祥
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-28">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第29句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-29">
-                         汨罗江在诉说着一段传奇的故事
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-29">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第30句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-30">
-                           五月端午粽糕飘香
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-30">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<body class="font-inter bg-neutral-light min-h-screen">
 
 
 
-            <!-- 第31句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-31">
-                          粽叶艾草继续着不变的清香
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-31">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第32句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-32">
-                            投粽江河喂鱼以祭屈原
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-32">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第33句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-33">
-                          片片艾叶片片情
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-33">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第34句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-34">
-                           温婉甜粽在线打call
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-34">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第35句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-35">
-                          咸甜之争烽烟再起
-                  </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-35">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第36句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-36">
-                           只有油润不腻味道香甜的肉粽才是王道
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-36">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第37句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-37">
-                          深红色的咸肉泛着油光
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-37">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第38句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-38">
-                           咬上一口仿佛时间都静止了
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-38">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第39句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-39">
-                          还有鲜香无比的蛋黄肉粽
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-39">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第40句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-40">
-                          丰富的口感让我欲罢不能
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-40">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- 第41句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-41">
-                            肉粽知道灵魂的去处
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-41">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第42句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-42">
-                          肉粽党发言完毕
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-42">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第43句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-43">
-                            清清爽爽的甜粽才是人间值得
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-43">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第44句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-44">
-                           雪白的糯米包着甜甜的蜜枣
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-44">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第45句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-45">
-                           一定要让粽子在凉水里冷静一下
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-45">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第46句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-46">
-                         粘上点白糖就更绝了
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-46">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第47句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-47">
-                           白糖会使糯米更加的香甜弹牙
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-47">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第48句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-48">
-                            那种幸福从脚尖直冲到天灵盖的感觉
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-48">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第49句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-49">
-                            永生都难以忘记
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-49">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第50句祝福语 -->
-            <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="md:w-4/5">
-                        <p class="text-neutral text-lg blessing-item" id="blessing-50">
-                           甜粽党发言完毕
-                        </p>
-                    </div>
-                    <div class="md:w-1/5 flex justify-center md:justify-end">
-                        <button class="copy-btn btn-primary flex items-center" data-target="blessing-50">
-                            <i class="fa-regular fa-copy mr-2"></i>
-                            <span>复制</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-        <!-- 复制成功提示 -->
-        <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 flex items-center">
-            <i class="fa-regular fa-check-circle mr-2"></i>
-            <span id="toast-message">复制成功</span>
-        </div>
-
-        <!-- 页脚 -->
-        <footer class="mt-16 text-center text-neutral/50 text-sm">
-            <p>伏黑惠</p>
-        </footer>
+  <main class="max-w-6xl mx-auto px-4 pb-12">
+    <div class="grid grid-cols-1 gap-3" id="blessingContainer">
+      <!-- 祝福语卡片动态生成 -->
     </div>
+  </main>
 
-    <script>
-        // 获取所有复制按钮
-        const copyButtons = document.querySelectorAll('.copy-btn');
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toast-message');
+  <footer class="bg-white border-t border-gray-200 py-3">
+    <div class="text-center text-xs text-gray-500">
+       祝福语工具     </div>
+  </footer>
 
-        // 为每个复制按钮添加点击事件
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // 获取要复制的祝福语元素
-                const targetId = button.getAttribute('data-target');
-                const blessingElement = document.getElementById(targetId);
-                
-                // 创建临时文本区域并复制内容
-                const textArea = document.createElement('textarea');
-                textArea.value = blessingElement.textContent.trim().replace(/^\d+\.\s/, ''); // 移除序号
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                // 更改按钮样式和文本
-                const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fa-regular fa-check mr-2"></i><span>已复制</span>';
-                button.classList.remove('btn-primary');
-                button.classList.add('btn-success');
-                
-                // 显示提示信息
-                showToast('复制成功');
-                
-                // 3秒后恢复按钮原状
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.classList.remove('btn-success');
-                    button.classList.add('btn-primary');
-                }, 1000);
-            });
+  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-success text-white px-4 py-2 rounded-sm shadow-md opacity-0 transition-opacity duration-300">
+    <i class="fa fa-check mr-1"></i>
+    <span>已复制</span>
+  </div>
+
+  <script>
+    // 完整的100条祝福语数据
+    const blessings = [
+      { id: 1, content: "祝大家端午安康" },
+      { id: 2, content: "香囊寄思" },
+      { id: 3, content: "粽子飘香" },
+      { id: 4, content: "万树千山粽是情" },
+      { id: 5, content: "送你一颗好运粽" },
+      { id: 6, content: "五月五赛龙舟" },
+      { id: 7, content: "好的东西就需要分享" },
+      { id: 8, content: "愿幸福的粽叶裹住你" },
+      { id: 9, content: "送你一只香甜粽子" },
+      { id: 10, content: "想拉着你的手一起看龙舟" },
+      { id: 11, content: "禁止端午节不理我" },
+      { id: 12, content: "今年送你的粽子不一般" },
+      { id: 13, content: "祝你端午吉祥如意" },
+      { id: 14, content: "希望你粽是幸运" },
+      { id: 15, content: "蒲月初五是端午" },
+      { id: 16, content: "青绿的粽叶包裹浓浓的真情" },
+      { id: 17, content: "五色的丝线迎风飞舞" },
+      { id: 18, content: "五色新丝缠角粽" },
+      { id: 19, content: "汨罗江在诉说着一段神奇的故事" },
+      { id: 20, content: "又是佳节好时光" },
+      { id: 21, content: "热烈龙舟划动着千年的祈愿" },
+      { id: 22, content: "愿你品尝出人生的夸姣和蒲月五的情怀" },
+      { id: 23, content: "吃的是粽子甜的是生活" },
+      { id: 24, content: "长长丝线绑健康" },
+      { id: 25, content: "六月的轻风飘来淡淡的粽香" },
+      { id: 26, content: "甜甜粽馅溢飘香" },
+      { id: 27, content: "希望祝福能随着艾叶的淡淡清香飘到你那里" },
+      { id: 28, content: "赛舟驰骋处处祥" },
+      { id: 29, content: "汨罗江在诉说着一段传奇的故事" },
+      { id: 30, content: "五月端午粽糕飘香" },
+      { id: 31, content: "粽叶艾草继续着不变的清香" },
+      { id: 32, content: "投粽江河喂鱼以祭屈原" },
+      { id: 33, content: "片片艾叶片片情" },
+      { id: 34, content: "温婉甜粽在线打call" },
+      { id: 35, content: "咸甜之争烽烟再起" },
+      { id: 36, content: "只有油润不腻味道香甜的肉粽才是王道" },
+      { id: 37, content: "深红色的咸肉泛着油光" },
+      { id: 38, content: "咬上一口仿佛时间都静止了" },
+      { id: 39, content: "还有鲜香无比的蛋黄肉粽" },
+      { id: 40, content: "丰富的口感让我欲罢不能" },
+      { id: 41, content: "肉粽知道灵魂的去处" },
+      { id: 42, content: "肉粽党发言完毕" },
+      { id: 43, content: "清清爽爽的甜粽才是人间值得" },
+      { id: 44, content: "雪白的糯米包着甜甜的蜜枣" },
+      { id: 45, content: "一定要让粽子在凉水里冷静一下" },
+      { id: 46, content: "粘上点白糖就更绝了" },
+      { id: 47, content: "白糖会使糯米更加的香甜弹牙" },
+      { id: 48, content: "那种幸福从脚尖直冲到天灵盖的感觉" },
+      { id: 49, content: "永生都难以忘记" },
+      { id: 50, content: "甜粽党发言完毕" },
+      { id: 51, content: "到底是甜粽还是咸粽呢" },
+      { id: 52, content: "我觉得你要比粽子甜上那么一点" },
+      { id: 53, content: "乘着龙舟给你捎来端午的问候" },
+      { id: 54, content: "清香的叶子层层叠叠" },
+      { id: 55, content: "祝你健康平安过个清清凉凉的夏天" },
+      { id: 56, content: "红红的樱桃红红的枣" },
+      { id: 57, content: "用艾叶把烦恼都赶跑" },
+      { id: 58, content: "愿你拥有人间最美好最珍贵的一切" },
+      { id: 59, content: "五月初五恰逢端阳" },
+      { id: 60, content: "端午的祝福悄然而至" },
+      { id: 61, content: "小小的粽子里藏着我最真的心意" },
+      { id: 62, content: "愿你平安喜乐" },
+      { id: 63, content: "在江面的龙舟上再续永恒的主题" },
+      { id: 64, content: "相比粽子的甜咸我在意的是假期的长短" },
+      { id: 65, content: "汨罗江中藏着一位先贤的故事" },
+      { id: 66, content: "一层层的粽叶包裹的都是生活的香甜" },
+      { id: 67, content: "整个六月都飘着艾叶配粽子的香气" },
+      { id: 68, content: "我永远支持甜粽" },
+      { id: 69, content: "没什么好说的粽子就该是咸的" },
+      { id: 70, content: "祝福语伴着春风来了" },
+      { id: 71, content: "甜的咸的其实都行" },
+      { id: 72, content: "让我们一起干了这杯雄黄酒" },
+      { id: 73, content: "这枚香袋是我亲手做的" },
+      { id: 74, content: "用千娇百媚的芭蕉叶把你轻轻包裹" },
+      { id: 75, content: "让纸鸢带着我的祝福飞向你" },
+      { id: 76, content: "挂着彩绳放风筝是端午最开心的事了" },
+      { id: 77, content: "平安吉祥端午安康" },
+      { id: 78, content: "艾蒿高高门前舞" },
+      { id: 79, content: "苇叶和糯米也包含着对屈原的无限敬意" },
+      { id: 80, content: "路漫漫其修远兮" },
+      { id: 81, content: "吾将上下而求索" },
+      { id: 82, content: "吃粽子的同时也要记得驱五毒哦" },
+      { id: 83, content: "万人齐赛龙舟真是再壮观不过了" },
+      { id: 84, content: "这五彩的丝线缠着的是我的无尽牵挂" },
+      { id: 85, content: "我可是最棒的龙舟手" },
+      { id: 86, content: "希望你的六月有西瓜的清凉" },
+      { id: 87, content: "说实话咸的我能吃甜的我也可以" },
+      { id: 88, content: "希望六月能善待你" },
+      { id: 89, content: "一株暗香四溢的艾草传递着我的情意" },
+      { id: 90, content: "端午假期能见到你才是最幸福的事" },
+      { id: 91, content: "粽子和我的爱意一样都是甜的" },
+      { id: 92, content: "清润端阳节" },
+      { id: 93, content: "茅檐插艾新" },
+      { id: 94, content: "浴兰包粽念忠臣" },
+      { id: 95, content: "千古不亡湘水身" },
+      { id: 96, content: "甜的咸的我都吃" },
+      { id: 97, content: "咸蛋黄遇见白糯米" },
+      { id: 98, content: "幸运的我遇见最好的你" },
+      { id: 99, content: "我从咸粽区来看甜粽区的你" },
+      { id: 100, content: "五彩绳缠住了思念" },
+    ];
+
+    // 渲染函数
+    function renderBlessings() {
+      const container = document.getElementById('blessingContainer');
+      container.innerHTML = blessings.map(blessing => `
+        <div class="blessing-card bg-white rounded-sm shadow-micro p-3">
+          <div class="flex items-center mb-2">
+            <div class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2">
+              <span class="text-primary font-semibold text-xs">${blessing.id}</span>
+            </div>
+            <p class="text-gray-800 text-xs ${blessing.content === '无' ? 'text-gray-400 italic' : ''}">
+              ${blessing.content || '（无内容）'}
+            </p>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-400">ID: ${blessing.id.toString().padStart(3, '0')}</span>
+            <button class="copy-btn px-8 py-3 bg-primary text-white text-xs rounded-sm" data-id="${blessing.id}">
+              <i class="fa fa-copy mr-0.5"></i> 复制
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // 绑定复制事件
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = parseInt(btn.dataset.id);
+          const content = blessings.find(b => b.id === id).content;
+          if (content === '无') return showToast('无内容');
+          navigator.clipboard.writeText(content).then(() => showToast());
         });
+      });
+    }
 
-        // 显示提示信息函数
-        function showToast(message) {
-            toastMessage.textContent = message;
-            toast.classList.replace('opacity-0', 'opacity-100');
-            
-            // 3秒后隐藏提示
-            setTimeout(() => {
-                toast.classList.replace('opacity-100', 'opacity-0');
-            }, 1000);
-        }
+    
+    // 初始化渲染
+    document.addEventListener('DOMContentLoaded', renderBlessings);
 
-        // 页面加载动画
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('animate-fade-in');
-                }, 100 * index);
-            });
-        });
-    </script>
-</body>
-</html>
+    // 提示框
+    function showToast(msg = '已复制') {
+      const toast = document.getElementById('toast');
+      toast.querySelector('span').textContent = msg;
+      toast.classList.add('opacity-100');
+      setTimeout(() => toast.classList.remove('opacity-100'), 1500);
+    }
+  </script>
+
     
